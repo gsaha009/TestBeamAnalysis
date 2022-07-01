@@ -21,6 +21,8 @@ void TrackHistos::bookHistos() {
 
   resXfei4 = new TH1F("resXfei4", "Track x-residual at FeI4 plane", 2000, -10., 10.);
   resYfei4 = new TH1F("resYfei4", "Track y-residual at FeI4 plane", 2000, -10., 10.);
+  rawResXfei4 = new TH1F("rawResXfei4", "Track x-residual at FeI4 plane", 2000, -25., 25.);
+  rawResYfei4 = new TH1F("rawResYfei4", "Track y-residual at FeI4 plane", 2000, -25., 25.);
   matchedRefHitMap = new TH2D("matchedRefHitMap", "Matched Ref hits map", 2000, -10, 10, 3000, -15, 15);
 
 }
@@ -47,13 +49,13 @@ void SensorHistos::bookHistos() {
 
   ncls_Fe0 = new TH1I("nClusterfe0_" + sensorId, "Cluster profile FE0 for sensor " + sensorId, 60, -0.5, 59.5);
   ncls_Fe1 = new TH1I("nClusterfe1_" + sensorId, "Cluster profile FE1 for sensor " + sensorId, 60, -0.5, 59.5);
-  clspos_Fe0 = new TH1F("clusterPosfe0_" + sensorId, "Cluster profile FE0 " + sensorId, 1016, 1, 1017);
-  clspos_Fe1 = new TH1F("clusterPosfe1_" + sensorId, "Cluster profile FE1 " + sensorId, 1016, 1, 1017);
-  clspos_FeAll = new TH1F("clusterPosfeAll_" + sensorId, "Cluster profile FEAll " + sensorId, 1016, 1, 1017);
+  clsposfe0 = new TH1F("clusterPosfe0_" + sensorId, "Cluster profile FE0 " + sensorId, 1016, 1, 1017);
+  clsposfe1 = new TH1F("clusterPosfe1_" + sensorId, "Cluster profile FE1 " + sensorId, 1016, 1, 1017);
+  //clspos_FeAll = new TH1F("clusterPosfeAll_" + sensorId, "Cluster profile FEAll " + sensorId, 1016, 1, 1017);
   clspos = new TH1F("clusterPos_" + sensorId, "Cluster profile " + sensorId, 2032, 1, 2033);
 
-  clswidth_Fe0 = new TH1I("clusterWidthfe0_" + sensorId, "Cluster width FE0 " + sensorId, 20, -0.5, 19.5);
-  clswidth_Fe1 = new TH1I("clusterWidthfe1_" + sensorId, "Cluster width FE1 " + sensorId, 20, -0.5, 19.5);
+  clswidthfe0 = new TH1I("clusterWidthfe0_" + sensorId, "Cluster width FE0 " + sensorId, 20, -0.5, 19.5);
+  clswidthfe1 = new TH1I("clusterWidthfe1_" + sensorId, "Cluster width FE1 " + sensorId, 20, -0.5, 19.5);
 
   clswidth_alltdc = new TH1F("clswidth_alltdc_" + sensorId, "", 20, -0.5, 19.5);
   clswidth_tdc2 = new TH1F("clswidth_tdc2_" + sensorId, "", 20, -0.5, 19.5);
@@ -78,13 +80,13 @@ void SensorHistos::writeHistostofile(TFile* fout, TString modname) {
   ncls_Fe0->Write();
   ncls_Fe1->Write();
 
-  clspos_Fe0->Write();
-  clspos_Fe1->Write();
-  clspos_FeAll->Write();
+  clsposfe0->Write();
+  clsposfe1->Write();
+  //clspos_FeAll->Write();
   clspos->Write();
 
-  clswidth_Fe0->Write();
-  clswidth_Fe1->Write();  
+  clswidthfe0->Write();
+  clswidthfe1->Write();  
 
   clswidth_alltdc->Write();
   clswidth_tdc2->Write();
@@ -183,7 +185,6 @@ void ModuleHistos::bookHistos() {
 
 ModuleHistos::~ModuleHistos() {
   std::cout << "Destroying module histo" << std::endl;
-
 }
 
 void ModuleHistos::writeHistostofile(TFile* fout) {

@@ -11,7 +11,7 @@ PYOBJ=$(filter-out $(BINDIR)/main.o,$(OBJ))
 
 .PHONY: all
 all:
-	$(info, "--- Full compilation --- ")	
+	$(info, "--- Full compilation --- ")
 	$(MAKE) libBTAnalysis.so
 	$(MAKE) baseline.exe
 

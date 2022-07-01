@@ -10,6 +10,7 @@
 #include <TTreeReader.h>
 #include <TTreeReaderValue.h>
 #include <TTreeReaderArray.h>
+#include <ctime>
 
 // Header file for the classes stored in the TTree if any.
 #include<iostream>
@@ -23,15 +24,14 @@
 //Odd == Bottom
 enum SENSORID{
   Mod1TOP    =30, 
-  Mod1BOTTOM =31, 
-  Mod2TOP    =32, 
-  Mod2BOTTOM =33
+  Mod1BOTTOM =31
 };
 
 class BTAnalyzer {
 public :
-  BTAnalyzer(TString inFile, unsigned int nMods, TString sensorType, TString outFile);
-   virtual ~BTAnalyzer();
+  //BTAnalyzer(TString inFile, TString sensorType, TString outFile);
+  BTAnalyzer(TString inFile, TString outFile);
+  virtual ~BTAnalyzer();
    bool Init();
    void Loop();
    void offlineclusterizer(std::vector<int>& hits, const unsigned int nCbc, const unsigned int nStripsPerCBC, std::vector<cluster>& clusVec );
@@ -69,7 +69,8 @@ private :
    TTreeReaderValue< std::vector< int > >    *clustersize_fp;
 
 
-   ModuleHistos*  mhists_[4];
+   //ModuleHistos*  mhists_[4];
+   ModuleHistos*  mhists_;
    TrackHistos*   tkhists_;
 
    TTreeReaderValue< std::vector< double > >* xPos_;

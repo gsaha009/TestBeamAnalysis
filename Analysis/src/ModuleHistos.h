@@ -33,6 +33,8 @@ class TrackHistos {
     TProfile* refx_y;
     TProfile* refy_x; 
     TProfile* refy_y; 
+    TH1F* rawResXfei4;
+    TH1F* rawResYfei4;
     TH1F* resXfei4;
     TH1F* resYfei4;
     TH1I* nTk;
@@ -66,13 +68,15 @@ class SensorHistos {
     TH1I* ncls_Fe0;
     TH1I* ncls_Fe1;
 
-    TH1F* clspos_Fe0;
-    TH1F* clspos_Fe1;
-    TH1F* clspos_FeAll;
+    TH1F* clsposfe0;
+    TH1F* clsposfe1;
+    //TH1F* clspos_Fe0;
+    //TH1F* clspos_Fe1;
+    //TH1F* clspos_FeAll;
     TH1F* clspos;
  
-    TH1I* clswidth_Fe0;
-    TH1I* clswidth_Fe1;   
+    TH1I* clswidthfe0;
+    TH1I* clswidthfe1;   
 
     TH1F* clswidth_alltdc;
     TH1F* clswidth_tdc2;
@@ -91,6 +95,7 @@ class ModuleHistos {
 public:
 
   ModuleHistos() {}
+  virtual ~ModuleHistos();
 
   ModuleHistos(TString modname) {
     moduleId = modname;
@@ -101,7 +106,6 @@ public:
 
   void writeHistostofile(TFile* fout);
   void bookHistos();
-  virtual ~ModuleHistos();
   TString moduleId;
 
   TH1I* ncbcstubsfe0;
